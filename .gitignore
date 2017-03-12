@@ -1,0 +1,4 @@
+main
+parser/*.go
+parser/*.tokens
+*.swp
