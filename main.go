@@ -15,8 +15,12 @@ func NewTreeShapeListener() *TreeShapeListener {
 	return new(TreeShapeListener)
 }
 
-func (this *TreeShapeListener) EnterEveryRule(ctx antlr.ParserRuleContext) {
+func (*TreeShapeListener) EnterLine(ctx *parser.LineContext) {
+	fmt.Println("VRSTICA")
 	fmt.Println(ctx.GetText())
+}
+
+func (this *TreeShapeListener) EnterEveryRule(ctx antlr.ParserRuleContext) {
 }
 
 func main() {

@@ -4,6 +4,7 @@ grammar Polh;
  * Lexer
  */
 
+/* skip whitespaces for the moment */
 
 ASTERISK            : '*' ;
 SLASH               : '/' ;
@@ -17,24 +18,23 @@ fragment LOWERCASE  : [a-z] ;
 fragment UPPERCASE  : [A-Z] ;
 fragment DIGIT      : [0-9] ;
  
-
-WHITESPACE          : (' ') ;
 IDENTIFIER          : (LOWERCASE | UPPERCASE)+ ;
 
 NUMBER         : DIGIT+ ([.,] DIGIT+)? ;
-NEWLINE        : ('\r'? '\n' | '\r')+ ;
+NEWLINE        : ('\r\n'|'\n'|'\r') ;
+WS             : ' ' ;
 
 /**
  * Parser
  */
 
-program             : line+ EOF;
-line                : expression NEWLINE;
+program             : line (NEWLINE line?)* EOF;
+line 				: expression;
 
-expression          : LPARENTHESE expression RPARENTHESE        #parenthesisExp
-                    | expression (ASTERISK|SLASH|MODULO) expression    #mulDivExp
-                    | expression (PLUS|MINUS) expression        #addSubExp
-                    | NUMBER                                    #numericAtomExp
-                    | IDENTIFIER                                #idAtomExp
+expression          : LPARENTHESE WS+ expression WS+ RPARENTHESE               #parenthesisExp
+                    | expression WS+ (ASTERISK|SLASH|MODULO) WS+ expression    #mulDivExp
+                    | expression WS+ (PLUS|MINUS) WS+ expression               #addSubExp
+                    | NUMBER                                           #numericAtomExp
+                    | IDENTIFIER                                       #idAtomExp
                     ;
 
