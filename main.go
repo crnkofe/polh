@@ -23,9 +23,11 @@ func main() {
 	input := antlr.NewFileStream(os.Args[1])
 	lexer := parser.NewPolhLexer(input)
 	stream := antlr.NewCommonTokenStream(lexer, 0)
+
 	p := parser.NewPolhParser(stream)
 	p.AddErrorListener(antlr.NewDiagnosticErrorListener(true))
 	p.BuildParseTrees = true
 	tree := p.Program()
+
 	antlr.ParseTreeWalkerDefault.Walk(NewTreeShapeListener(), tree)
 }

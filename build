@@ -1,0 +1,8 @@
+#!/bin/zsh
+java -Xmx500M -cp \"/usr/local/lib/antlr-4.6-complete.jar:$CLASSPATH\" org.antlr.v4.Tool -Dlanguage=Go parser/Polh.g4
+if [ $? -ne 0 ]
+then
+	echo "failed generating Polh parser"
+	exit 1
+fi
+go build main.go
