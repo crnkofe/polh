@@ -1,0 +1,9 @@
+#!/bin/bash
+./build
+if [ $? -ne 0 ]
+then
+	echo "failed building parser from grammar"
+	exit 1
+fi
+./main tests/basic.polh
+./main tests/expression_basic.polh

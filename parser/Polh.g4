@@ -28,12 +28,12 @@ NEWLINE        : ('\r'? '\n' | '\r')+ ;
  */
 
 program             : line+ EOF;
-line                : IDENTIFIER NEWLINE;
-/*
+line                : expression NEWLINE;
+
 expression          : LPARENTHESE expression RPARENTHESE        #parenthesisExp
                     | expression (ASTERISK|SLASH) expression    #mulDivExp
                     | expression (PLUS|MINUS) expression        #addSubExp
                     | NUMBER                                    #numericAtomExp
                     | IDENTIFIER                                #idAtomExp
                     ;
-*/
+
