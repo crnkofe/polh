@@ -9,6 +9,7 @@ ASTERISK            : '*' ;
 SLASH               : '/' ;
 PLUS                : '+' ;
 MINUS               : '-' ;
+MODULO              : 'mod' ;
 LPARENTHESE 		: '(' ;
 RPARENTHESE 		: ')' ;
 
@@ -18,7 +19,7 @@ fragment DIGIT      : [0-9] ;
  
 
 WHITESPACE          : (' ') ;
-IDENTIFIER          : (LOWERCASE | UPPERCASE )+ ;
+IDENTIFIER          : (LOWERCASE | UPPERCASE)+ ;
 
 NUMBER         : DIGIT+ ([.,] DIGIT+)? ;
 NEWLINE        : ('\r'? '\n' | '\r')+ ;
@@ -31,7 +32,7 @@ program             : line+ EOF;
 line                : expression NEWLINE;
 
 expression          : LPARENTHESE expression RPARENTHESE        #parenthesisExp
-                    | expression (ASTERISK|SLASH) expression    #mulDivExp
+                    | expression (ASTERISK|SLASH|MODULO) expression    #mulDivExp
                     | expression (PLUS|MINUS) expression        #addSubExp
                     | NUMBER                                    #numericAtomExp
                     | IDENTIFIER                                #idAtomExp

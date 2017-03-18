@@ -5,5 +5,5 @@ then
 	echo "failed building parser from grammar"
 	exit 1
 fi
-./main tests/basic.polh
-./main tests/expression_basic.polh
+echo "testing basic.polh"; ./main tests/basic.polh;
+echo "testing expression_basic.polh"; ./main tests/expression_basic.polh
